@@ -36,6 +36,7 @@ gem "bootsnap", require: false
 
 gem "simple_form", "~> 5.3", ">= 5.3.1"
 gem "bootstrap", "~> 5.3", ">= 5.3.3"
+gem "sassc-rails", "~> 2.1", ">= 2.1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
