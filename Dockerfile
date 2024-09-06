@@ -12,9 +12,20 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 WORKDIR /rails
 
 # Install base packages
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN apt-get update -qq \
+    && apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# https://thriveread.com/sqlite-docker-container-and-docker-compose/
+# Create a directory to store the database
+WORKDIR /db
+# Copy your SQLite database file into the container
+COPY initial-db.sqlite /db/
+# Expose the port if needed
+# EXPOSE 1433
+# Command to run when the container starts
+CMD ["sqlite3", "/data/initial-db.sqlite"]
 
 # Set production environment
 ENV RAILS_ENV="production" \
@@ -26,9 +37,10 @@ ENV RAILS_ENV="production" \
 FROM base AS build
 
 # Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git pkg-config && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN apt-get update -qq \
+    && apt-get install --no-install-recommends -y build-essential git pkg-config \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -40,15 +52,15 @@ RUN bundle install && \
 COPY . .
 
 # Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
+RUN bundle exec bootsnap precompile app/ lib/ \
 
 # Adjust binfiles to be executable on Linux
-RUN chmod +x bin/* && \
+&&  chmod +x bin/* && \
     sed -i "s/\r$//g" bin/* && \
-    sed -i 's/ruby\.exe$/ruby/' bin/*
+    sed -i 's/ruby\.exe$/ruby/' bin/* \
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+&&  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 
 
