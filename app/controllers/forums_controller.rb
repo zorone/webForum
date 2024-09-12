@@ -3,6 +3,10 @@ class ForumsController < ApplicationController
     @forums = Forum.all.order("created_at DESC")
   end
 
+  def show
+    @forum = Forum.find(params[:id])
+  end
+
   def new
     @forum = Forum.new
   end
