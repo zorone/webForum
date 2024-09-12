@@ -1,1 +1,4 @@
-<h1>This is the index method of the forums controller</h1>
+<% @forums.each do |forum| %>
+  <h2><%= forum.thread %></h2>
+  <% end %>
+<%= link_to "New Forum Thread", new_forum_path %>
