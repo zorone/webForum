@@ -24,7 +24,15 @@
       </div>
       <ul class="nav navber-nav">
         <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Log In", new_user_session_path %></li>
+        <% end %>
       </ul>
+      <% if user_signed_in? %>
+        <p><%= link_to "New Forum Thread", new_forum_path, class: "navbar-right navbar-text navbar-link" %></p>
+      <% end %>
     </nav>
 
     <p class="notice"><%= notice %></p>
