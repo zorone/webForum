@@ -11,9 +11,6 @@ before_action :forum_finding, only: [ :show, :edit, :update, :destroy ]
   def edit
   end
 
-  def destroy
-  end
-
   def new
     @forum = Forum.new
   end
@@ -33,6 +30,11 @@ before_action :forum_finding, only: [ :show, :edit, :update, :destroy ]
     else
       render "edit"
     end
+  end
+
+  def destroy
+    @forum.destroy
+    redirect_to root_path
   end
 
   private
