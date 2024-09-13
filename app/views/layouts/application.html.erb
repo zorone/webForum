@@ -20,10 +20,11 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-body-secondary">
       <div class="container-fluid">
-        <div class="navbar-brand">
-          <%= link_to "Home", root_path, class: "navbar-brand" %>
-        </div>
+        <%= link_to "Home", root_path, class: "navbar-brand" %>
       </div>
+      <ul class="nav navber-nav">
+        <li><%= link_to "Sign Up", new_user_registration_path %></li>
+      </ul>
     </nav>
 
     <p class="notice"><%= notice %></p>
