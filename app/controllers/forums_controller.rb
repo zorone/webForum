@@ -11,9 +11,6 @@ before_action :forum_finding, only: [ :show, :edit, :update, :destroy ]
   def edit
   end
 
-  def update
-  end
-
   def destroy
   end
 
@@ -27,6 +24,13 @@ before_action :forum_finding, only: [ :show, :edit, :update, :destroy ]
       redirect_to root_path
     else
       render "new"
+    end
+  
+  def update
+    if @forum.update(forum_params)
+      refirect_to forum_path
+    else
+      render 'edit'
     end
   end
 
