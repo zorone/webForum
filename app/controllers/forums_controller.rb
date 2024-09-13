@@ -25,12 +25,13 @@ before_action :forum_finding, only: [ :show, :edit, :update, :destroy ]
     else
       render "new"
     end
-  
+  end
+
   def update
     if @forum.update(forum_params)
       refirect_to forum_path
     else
-      render 'edit'
+      render "edit"
     end
   end
 
