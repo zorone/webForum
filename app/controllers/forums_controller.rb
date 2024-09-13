@@ -29,7 +29,7 @@ before_action :forum_finding, only: [ :show, :edit, :update, :destroy ]
 
   def update
     if @forum.update(forum_params)
-      refirect_to forum_path
+      redirect_to forum_path
     else
       render "edit"
     end
