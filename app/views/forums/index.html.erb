@@ -1,5 +1,7 @@
 <% @forums.each do |forum| %>
-  <h2><%= forum.thread %></h2>
-  <%= link_to "View Forum Thread", forum_path(forum), class: "btn btn-outline-primary" %>
+    <div class="col-md-4">
+      <h2><%= forum.thread %></h2>
+      <%= link_to "View Forum Thread", forum_path(forum), class: "btn btn-outline-primary" %>
+    </div>
   <% end %>
 <%= link_to "New Forum Thread", new_forum_path %>
