@@ -1,4 +1,5 @@
 <h2><%= @forum.thread %></h2>
+<p><b>Posted by</b> <%= @forum.user.email %>, <%= time_ago_in_words(@forum.created_at) %> ago</p>
 <p><%= @forum.content %></p>
 
 <h3>Comments:</h3>
