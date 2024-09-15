@@ -1,6 +1,9 @@
 <h2><%= @forum.thread %></h2>
 <p><%= @forum.content %></p>
 
+<h3>Comments:</h3>
+<%= render @forum.comments %>
+
 <h3>Reply to the thread:</h3>
 <%= render 'comments/form' %>
 
