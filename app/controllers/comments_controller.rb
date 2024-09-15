@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 before_action :find_forum
-before_action :find_comment, only [:edit, :update, :destroy]
+before_action :find_comment, only: [ :edit, :update, :destroy ]
 
   def create
     @forum = Forum.find(params[:forum_id])
@@ -21,7 +21,7 @@ before_action :find_comment, only [:edit, :update, :destroy]
     if @comment.update(comment_params)
       redirect_to forum_path(@forum)
     else
-      render 'edit'
+      render "edit"
     end
   end
 
