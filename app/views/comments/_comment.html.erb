@@ -1,6 +1,9 @@
 <p><%= comment.message%></p>
 <p>Posted by <%= comment.user.email %>, <%= time_ago_in_words(comment.created_at) %> ago</p>
 
-
-<%= link_to "Edit", edit_forum_comment_path(comment.forum, comment) %>
-<%= button_to "Delete", forum_comment_path(comment.forum, comment), method: :delete, data: {turbo_confirm: "Are you sure to delete this comment"} %>
+<% if user_signed_in? %>
+    <% if @forum.user_id == current_user.id %>
+        <%= link_to "Edit", edit_forum_comment_path(comment.forum, comment) %>
+        <%= button_to "Delete", forum_comment_path(comment.forum, comment), method: :delete, data: {turbo_confirm: "Are you sure to delete this comment"} %>
+    <% end %>
+<% end %>
