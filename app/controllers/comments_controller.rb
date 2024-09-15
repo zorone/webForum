@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+before_action :authenticate_user!
 before_action :find_forum
 before_action :find_comment, only: [ :edit, :update, :destroy ]
 
