@@ -11,13 +11,15 @@
             <h3 class="thread-reply">Reply to the thread:</h3>
             <%= render 'comments/form' %>
 
-            <%= link_to "Back", root_path %>
-            <% if user_signed_in? %>
-                <% if @forum.user_id == current_user.id %>
-                    <%= link_to "Edit", edit_forum_path(@forum) %>
-                    <%= button_to "Delete", forum_path(@forum), method: :delete, data: {turbo_confirm: "Are you sure to delete this thread?"} %>
+            <div class="link btn-group">
+                <%= link_to "Back", root_path %>
+                <% if user_signed_in? %>
+                    <% if @forum.user_id == current_user.id %>
+                        <%= link_to "Edit", edit_forum_path(@forum) %>
+                        <%= button_to "Delete", forum_path(@forum), method: :delete, data: {turbo_confirm: "Are you sure to delete this thread?"} %>
+                    <% end %>
                 <% end %>
-            <% end %>
+            </div>
         </div>
     </div>
 </div>
