@@ -86,25 +86,32 @@
     }
 }
 
+.links {
+    margin-top: 20px;
+    .btn-default {
+        color: #0A8FD5;
+    }
+}
+
 .comment {
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #FFF;
     padding-top: 15px;
     padding-bottom: 15px;
-}
-
-.comment-content {
-    font-size: 1.25em;
-}
-
-.comment-post {
-    color: #eee;
-    font-size: 0.8em;
-}
-
-.links {
-    margin-top: 15px;
-    a {
-        color: #0a8fd5;
-        margin-right: 15px;
+    
+    .comment-content {
+        font-size: 1.25em;
+    }
+    
+    .comment-post {
+        color: #EEE;
+        font-size: 0.8em;
+    }
+    
+    .links {
+        margin-top: 15px;
+        a {
+            color: #0A8FD5;
+            margin-right: 15px;
+        }
     }
 }
