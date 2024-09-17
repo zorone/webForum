@@ -12,11 +12,11 @@
             <%= render 'comments/form' %>
 
             <div class="links btn-group">
-                <%= link_to "Back", root_path %>
+                <%= link_to "Back", root_path, class: "btn btn-default" %>
                 <% if user_signed_in? %>
                     <% if @forum.user_id == current_user.id %>
-                        <%= link_to "Edit", edit_forum_path(@forum) %>
-                        <%= button_to "Delete", forum_path(@forum), method: :delete, data: {turbo_confirm: "Are you sure to delete this thread?"} %>
+                        <%= link_to "Edit", edit_forum_path(@forum), class: "btn btn-default" %>
+                        <%= button_to "Delete", forum_path(@forum), method: :delete, data: {turbo_confirm: "Are you sure to delete this thread?"}, class: "btn btn-default" %>
                     <% end %>
                 <% end %>
             </div>
