@@ -48,6 +48,11 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # github CI workflow
+  gem "pg", require: false
+  gem "bundler-audit", require: false
+  gem "importmap", require: false
 end
 
 group :development do
