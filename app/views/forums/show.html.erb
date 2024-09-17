@@ -11,7 +11,7 @@
             <h3 class="thread-reply">Reply to the thread:</h3>
             <%= render 'comments/form' %>
 
-            <div class="link btn-group">
+            <div class="links btn-group">
                 <%= link_to "Back", root_path %>
                 <% if user_signed_in? %>
                     <% if @forum.user_id == current_user.id %>
