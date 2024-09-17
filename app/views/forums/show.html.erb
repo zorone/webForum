@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
+<div class="grid" justify-content="center">
+    <div class="g-col-md-8 g-col-md-offset-2">
         <h2><%= @forum.thread %></h2>
         <p><b>Posted by</b> <%= @forum.user.email %>, <%= time_ago_in_words(@forum.created_at) %> ago</p>
         <p><%= @forum.content %></p>
@@ -18,4 +18,4 @@
             <% end %>
         <% end %>
     </div>
-<div>
+</div>
