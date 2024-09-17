@@ -1,4 +1,4 @@
-<div class="grid" justtify-content="space-around">
+<div class="grid">
     <div class="g-col-md-8 g-col-md-offset-2">
         <h2><%= @forum.thread %></h2>
         <p><b>Posted by</b> <%= @forum.user.email %>, <%= time_ago_in_words(@forum.created_at) %> ago</p>
