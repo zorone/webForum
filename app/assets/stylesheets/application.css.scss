@@ -16,3 +16,41 @@
  $enable-cssgrid: true;
 
  @import "bootstrap";
+.thread-button {
+    background-color: white;
+    color: blue;
+    font-family: 'Muli', sans-serif;
+    font-weight: 300;
+    border-radius: 8px;
+    padding: 10px 20px;
+    &:hover {
+        color: white;
+        transition: 0.5s;
+        background-color: black;
+        text-decoration: none0;
+    }
+}
+
+.thread {
+    box-sizing: border-box;
+    background-color: #003399;
+    margin-bottom: 25px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 1.4em 1.4em;
+    height: 150px;
+    border-bottom: 4px solid #FF3333;
+}
+
+.thread-title {
+    font-size: 1.5em;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 300;
+    margin-top: 0;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.thread-button {
+    margin-top: 20px;
+}

@@ -1,8 +1,10 @@
 <div class="grid text-center">
   <% @forums.each do |forum| %>
     <div class="g-col-md-4">
-      <h2><%= forum.thread %></h2>
-      <%= link_to "View Forum Thread", forum_path(forum), class: "btn btn-outline-primary" %>
+      <div class="thread">
+        <h2 class="thread-title"><%= forum.thread %></h2>
+        <%= link_to "View Forum Thread", forum_path(forum), class: "thread-button" %>
+      </div>
     </div>
   <% end %>
 </div>
