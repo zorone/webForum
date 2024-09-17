@@ -56,3 +56,32 @@
 .thread-button {
     margin-top: 20px;
 }
+
+.thread-show {
+    box-sizing: border-box;
+    background-color: #8b4513;
+    padding: 2.0em 1.5em;
+    border-bottom: 4px solid #0a8fd5;
+    color: #fff;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 300;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.thread-desc {
+    font-size: 1.1em;
+    line-height: 1.75;
+    margin-bottom: 50px;
+}
+
+.thread-post {
+    color: #eee;
+    font-size: 0.9em;
+}
+
+.thread-reply {
+    margin-top: 50px;
+}
