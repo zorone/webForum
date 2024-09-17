@@ -1,18 +1,9 @@
-<div class="container text-center">
+<div class="grid text-center">
   <% @forums.each do |forum| %>
-    <div class="col-md-6">
+    <div class="g-col-md-4">
       <h2><%= forum.thread %></h2>
       <%= link_to "View Forum Thread", forum_path(forum), class: "btn btn-outline-primary" %>
     </div>
   <% end %>
 </div>
 <%= link_to "New Forum Thread", new_forum_path %>
-<div class="container">
-    <div class="grid text-center">
-        <div class="g-col-6">.g-col-6</div>
-        <div class="g-col-6">.g-col-6</div>
-      
-        <div class="g-col-6">.g-col-6</div>
-        <div class="g-col-6">.g-col-6</div>
-    </div>    
-</div>
