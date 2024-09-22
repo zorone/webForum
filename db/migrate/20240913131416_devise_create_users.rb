@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DeviseCreateUsers < ActiveRecord::Migration[7.2]
-  def up
+  def change
     create_table :users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
@@ -40,14 +40,5 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.2]
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
-
-    # TODO: make default unknown (UID: 0) and anonymous (UID: 1) user
-    # TODO: implement ::BCrypt::Password.create(password, cost: klass.stretches).to_s
-    #       from C:\Users\ASUS\.local\share\gem\ruby\3.2.0\gems\devise-4.9.4\lib\devise\encryptor.rb
-    User.find_or_create_by!(email: 'unknown@example.org')
-  end
-
-  def down
-    drop_table :users
   end
 end
