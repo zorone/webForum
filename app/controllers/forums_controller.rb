@@ -34,7 +34,7 @@ before_action :authenticate_user!, only: [ :new ]
   end
 
   def destroy
-    dbg = @forum.comments
+    logger.debug @forum.comments
     # @forum.destroy
     # redirect_to root_path
   end

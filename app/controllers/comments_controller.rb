@@ -27,7 +27,7 @@ before_action :find_comment, only: [ :edit, :update, :destroy ]
   end
 
   def destroy
-    Rails.logger Comment.class
+    @comment.destroy
     redirect_to forum_path(@forum)
   end
 
