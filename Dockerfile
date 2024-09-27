@@ -35,7 +35,7 @@ ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development"
 
 # Throw-away build stage to reduce size of final image
-FROM base AS build
+FROM base AS prebuild
 
 # Install packages needed to build gems
 # RUN apt-get update -qq \
@@ -64,14 +64,14 @@ RUN bundle install && \
 &&  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile \
 
 # Final stage for app image
-FROM base
+FROM prebuild AS build
 
 # Copy built artifacts: gems, application
-COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-COPY --from=build /rails /rails
+COPY --from=prebuild "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=prebuild /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
-&&  groupadd --system --gid 1000 rails \
+RUN groupadd --system --gid 1000 rails \
 &&  useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash \
 &&  mkdir log storage tmp \
 &&  chown -R rails:rails db \
