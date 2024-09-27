@@ -13,10 +13,10 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq \
-    && apt-get install --no-install-recommends -y \ 
+&&  apt-get install --no-install-recommends -y \ 
     build-essential curl git libjemalloc2 libpq-dev libvips nodejs pkg-config sqlite3 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+&&  apt-get clean \
+&&  rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # https://thriveread.com/sqlite-docker-container-and-docker-compose/
 # Create a directory to store the database
@@ -45,9 +45,9 @@ FROM base AS prebuild
 
 # Install application gems
 COPY . .
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile \
+RUN bundle install \
+&&  rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git \
+&&  bundle exec bootsnap precompile --gemfile \
 
 # Copy application code
 # COPY . .
@@ -61,20 +61,20 @@ RUN bundle install && \
     sed -i 's/ruby\.exe$/ruby/' bin/* \
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-&&  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile \
+&&  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile 
 
 # Final stage for app image
 FROM base AS build
 
 # Copy built artifacts: gems, application
-# COPY --from=prebuild "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-# COPY --from=prebuild /rails /rails
+COPY --from=prebuild "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=prebuild /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails \
 &&  useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash \
 &&  mkdir log storage tmp \
-&&  chown -R rails:rails db \
+&&  chown -R rails:rails db 
 USER 1000:1000
 
 # Entrypoint prepares the database.
