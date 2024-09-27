@@ -13,7 +13,8 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq \
-    && apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 \
+    && apt-get install --no-install-recommends -y \ 
+    build-essential curl git libjemalloc2 libpq-dev libvips nodejs pkg-config sqlite3 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
@@ -25,7 +26,7 @@ COPY initial-db.sqlite3 /db/
 # Expose the port if needed
 # EXPOSE 1433
 # Command to run when the container starts
-CMD ["sqlite3", "/data/initial-db.sqlite"]
+CMD ["sqlite3", "/data/initial-db.sqlite3"]
 
 # Set production environment
 ENV RAILS_ENV="production" \
@@ -37,22 +38,22 @@ ENV RAILS_ENV="production" \
 FROM base AS build
 
 # Install packages needed to build gems
-RUN apt-get update -qq \
-    && apt-get install --no-install-recommends -y build-essential git libpq-dev nodejs pkg-config  \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+# RUN apt-get update -qq \
+#     && apt-get install --no-install-recommends -y  \
+#     && apt-get clean \
+#     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
-COPY Gemfile Gemfile.lock ./
+COPY ./ ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
 # Copy application code
-COPY . .
+# COPY . .
 
 # Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/ \
+&&  bundle exec bootsnap precompile app/ lib/ \
 
 # Adjust binfiles to be executable on Linux
 &&  chmod +x bin/* && \
