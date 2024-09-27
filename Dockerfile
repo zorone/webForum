@@ -44,7 +44,7 @@ FROM base AS build
 #     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
-COPY ./ ./
+COPY . .
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile \
@@ -63,20 +63,21 @@ RUN bundle install && \
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 &&  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile \
 
-
-
-
 # Final stage for app image
-# FROM base
+FROM base
 
 # Copy built artifacts: gems, application
-# COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-# COPY --from=build /rails /rails
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build /rails /rails
+COPY --from=build /db /db
+COPY --from=build /log /log
+COPY --from=build /storage /storage
+COPY --from=build /tmp /tmp
 
 # Run and own only the runtime files as a non-root user for security
-&&  groupadd --system --gid 1000 rails && \
-    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails ./db ./log ./storage ./tmp
+&&  groupadd --system --gid 1000 rails \
+&&  useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash \
+&&  chown -R rails:rails db log storage tmp \
 USER 1000:1000
 
 # Entrypoint prepares the database.
@@ -84,4 +85,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/rails", "server"] 
+CMD ["./bin/rails", "server"]
