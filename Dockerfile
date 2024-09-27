@@ -23,7 +23,7 @@ COPY initial-db.sqlite3 /db/
 # Expose the port if needed
 # EXPOSE 1433
 # Command to run when the container starts
-CMD ["sqlite3", "/data/initial-db.sqlite3"]
+CMD ["sqlite3", "/db/initial-db.sqlite3"]
 
 # Set production environment
 ENV RAILS_ENV="production" \
