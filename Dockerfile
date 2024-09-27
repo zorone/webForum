@@ -17,13 +17,13 @@ RUN apt-get update -qq \
 
 # https://thriveread.com/sqlite-docker-container-and-docker-compose/
 # Create a directory to store the database
-WORKDIR /db
+# WORKDIR /db
 # Copy your SQLite database file into the container
-COPY initial-db.sqlite3 /db/
+# COPY initial-db.sqlite3 /db/
 # Expose the port if needed
 # EXPOSE 1433
 # Command to run when the container starts
-CMD ["sqlite3", "/db/initial-db.sqlite3"]
+# CMD ["sqlite3", "/db/initial-db.sqlite3"]
 
 # Set production environment
 ENV RAILS_ENV="production" \
@@ -63,7 +63,8 @@ RUN bundle install \
     sed -i 's/ruby\.exe$/ruby/' bin/* \
 #
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-&&  ./bin/rails assets:precompile 
+&&  ./bin/rails assets:precompile  \
+&&  ./bin/rails db:migrate
 
 # Final stage for app image
 FROM prebuild AS build
