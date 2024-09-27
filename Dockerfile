@@ -63,7 +63,7 @@ RUN bundle install \
     sed -i 's/ruby\.exe$/ruby/' bin/* \
 #
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-&&  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile 
+&&  ./bin/rails assets:precompile 
 
 # Final stage for app image
 FROM prebuild AS build
@@ -75,7 +75,7 @@ COPY --from=prebuild /rails /rails
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails \
 &&  useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash \
-&&  chown -R rails:rails db 
+&&  chown -R rails:rails db log storage tmp
 USER 1000:1000
 
 # Entrypoint prepares the database.
