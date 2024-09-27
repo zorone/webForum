@@ -64,7 +64,7 @@ RUN bundle install && \
 &&  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile \
 
 # Final stage for app image
-FROM prebuild AS build
+FROM base AS build
 
 # Copy built artifacts: gems, application
 COPY --from=prebuild "${BUNDLE_PATH}" "${BUNDLE_PATH}"
