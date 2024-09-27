@@ -47,7 +47,7 @@ FROM base AS build
 COPY ./ ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
+    bundle exec bootsnap precompile --gemfile \
 
 # Copy application code
 # COPY . .
@@ -61,22 +61,22 @@ RUN bundle install && \
     sed -i 's/ruby\.exe$/ruby/' bin/* \
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-&&  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+&&  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile \
 
 
 
 
 # Final stage for app image
-FROM base
+# FROM base
 
 # Copy built artifacts: gems, application
-COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-COPY --from=build /rails /rails
+# COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+# COPY --from=build /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
-RUN groupadd --system --gid 1000 rails && \
+&&  groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
+    chown -R rails:rails ./db ./log ./storage ./tmp
 USER 1000:1000
 
 # Entrypoint prepares the database.
