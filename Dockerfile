@@ -21,7 +21,7 @@ RUN apt-get update -qq \
 # Create a directory to store the database
 WORKDIR /db
 # Copy your SQLite database file into the container
-COPY initial-db.sqlite /db/
+COPY initial-db.sqlite3 /db/
 # Expose the port if needed
 # EXPOSE 1433
 # Command to run when the container starts
@@ -38,7 +38,7 @@ FROM base AS build
 
 # Install packages needed to build gems
 RUN apt-get update -qq \
-    && apt-get install --no-install-recommends -y build-essential git pkg-config \
+    && apt-get install --no-install-recommends -y build-essential git libpq-dev nodejs pkg-config  \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
