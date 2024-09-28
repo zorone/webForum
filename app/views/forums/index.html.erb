@@ -2,7 +2,7 @@
   <% @forums.each do |forum| %>
     <div class="g-col-md-4 g-col-sm-6 g-col-12">
       <div class="thread">
-        <h2 class="thread-title"><%= forum.thread %></h2>
+        <h2 class="thread-title text-truncate" title="<%= forum.thread %>"><%= forum.thread %></h2>
         <%= link_to "View Forum Thread", forum_path(forum), class: "btn btn-outline-primary thread-button" %>
       </div>
     </div>
