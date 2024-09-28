@@ -6,7 +6,7 @@
         <% if user_signed_in? %>
             <% if @forum.user_id == current_user.id %>
                 <%= link_to "Edit", edit_forum_comment_path(comment.forum, comment) %>
-                <%= link_to "Delete", forum_comment_path(comment.forum, comment), data: {turbo_confirm: "Are you sure to delete this comment", turbo_method: method: :delete } %>
+                <%= link_to "Delete", forum_comment_path(comment.forum, comment), data: {turbo_confirm: "Are you sure to delete this comment", turbo_method: :delete } %>
             <% end %>
         <% end %>
     </div>

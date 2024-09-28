@@ -26,7 +26,7 @@
       <ul class="nav navber-nav">
         <li><%= link_to "Sign Up", new_user_registration_path %></li>
         <% if user_signed_in? %>
-          <li><%= link_to "Sign Out", destroy_user_session_path, data: { method: :delete } %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete } %></li>
         <% else %>
           <li><%= link_to "Log In", new_user_session_path %></li>
         <% end %>
