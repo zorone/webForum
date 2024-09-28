@@ -16,7 +16,7 @@
                 <% if user_signed_in? %>
                     <% if @forum.user_id == current_user.id %>
                         <%= link_to "Edit", edit_forum_path(@forum), class: "btn btn-default" %>
-                        <%= button_to "Delete", forum_path(@forum), method: :delete, data: {turbo_confirm: "Are you sure to delete this thread?"}, class: "btn btn-default" %>
+                        <%= link_to "Delete", forum_path(@forum), data: {turbo_confirm: "Are you sure to delete this thread?", turbo_method: :delete }, class: "btn btn-default" %>
                     <% end %>
                 <% end %>
             </div>
