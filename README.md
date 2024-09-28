@@ -80,4 +80,4 @@ After I have used Ruby on Rails for a while. I feel like it lacks in many ways, 
 
 Also, whenever I tried to go out of the guidance zone, I always drop down in the middle of nowhere. Like, for my last work, which about try to run this project on docker. All weird problem risen up like crazy. I don't know how is that even possible...
 
-For my reseach log for this project, visit [here](https://github.com).
+For my reseach log for this project, visit [here](https://github.com/zorone/webForum/tree/master/journey).
