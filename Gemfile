@@ -54,7 +54,7 @@ group :development, :test do
   gem "importmap", require: false
 
   # for devise testing
-  gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
+  gem "factory_bot_rails", "~> 6.4", ">= 6.4.3"
 end
 
 group :development do
