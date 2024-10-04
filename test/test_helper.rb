@@ -8,8 +8,10 @@ module ActiveSupport
     parallelize(workers: :number_of_processors, with: :threads)
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-    fixtures :all
+    # We will not use fixtures
+    # fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    include FactoryBot::Syntax::Methods
   end
 end
