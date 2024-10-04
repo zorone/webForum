@@ -55,6 +55,7 @@ group :development, :test do
 
   # for devise testing
   gem "factory_bot_rails", "~> 6.4", ">= 6.4.3"
+  gem "faker", "~> 3.4", ">= 3.4.2"
 end
 
 group :development do
@@ -68,5 +69,3 @@ group :test do
   gem "selenium-webdriver"
   gem "bundler-audit"
 end
-
-gem "faker", "~> 3.4", ">= 3.4.2", :groups => [:development, :test]
