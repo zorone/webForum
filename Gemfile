@@ -68,3 +68,5 @@ group :test do
   gem "selenium-webdriver"
   gem "bundler-audit"
 end
+
+gem "faker", "~> 3.4", ">= 3.4.2", :groups => [:development, :test]
