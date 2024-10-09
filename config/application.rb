@@ -25,5 +25,7 @@ module WebForum
     # config.eager_load_paths << Rails.root.join("extras")
     config.logger = Logger.new(STDOUT)
     config.log_level = :debug
+
+    config.force_ssl = true
   end
 end
