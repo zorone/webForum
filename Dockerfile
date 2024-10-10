@@ -5,15 +5,16 @@
 # docker run -d -p 80:80 -p 443:443 --name my-app -e RAILS_MASTER_KEY=<value from config/master.key> my-app
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.2.4
-FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
+ARG RUBY_VERSION=3.3.5
+FROM docker.io/library/ruby:$RUBY_VERSION-alpine AS base
 
 # Install base packages
-RUN apt-get update -qq \
-&&  apt-get install --no-install-recommends -y \ 
-    build-essential curl git libjemalloc2 libpq-dev libvips nodejs openssl pkg-config sqlite3 \
-&&  apt-get clean \
-&&  rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN apk update \
+&&  apk upgrade \
+&&  apk add --no-cache --update \ 
+    alpine-sdk curl git jemalloc libpq-dev nodejs openssl pkgconf sqlite vips \
+&&  apk cache clean \
+&&  rm -rf /var/cache/apk/*
 
 # https://thriveread.com/sqlite-docker-container-and-docker-compose/
 # Create a directory to store the database

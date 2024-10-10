@@ -135,7 +135,7 @@ GEM
       rainbow
       thor
       zeitwerk
-    importmap-rails (2.0.1)
+    importmap-rails (2.0.2)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
@@ -162,7 +162,7 @@ GEM
     memoist (0.16.2)
     mini_mime (1.1.5)
     minitest (5.25.1)
-    msgpack (1.7.2)
+    msgpack (1.7.3)
     net-imap (0.4.16)
       date
       net-protocol
@@ -352,7 +352,7 @@ DEPENDENCIES
   selenium-webdriver
   simple_form (~> 5.3, >= 5.3.1)
   sprockets-rails
-  sqlite3 (>= 1.4)
+  sqlite3 (>= 2.1.0)
   stimulus-rails
   turbo-rails
   tzinfo-data
