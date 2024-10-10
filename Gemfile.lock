@@ -358,7 +358,7 @@ DEPENDENCIES
   sqlite3 (>= 2.1.0)
   stimulus-rails
   turbo-rails
-  tzinfo-data
+  tzinfo-data (~> 1.2024, >= 1.2024.2)
   web-console
 
 BUNDLED WITH
