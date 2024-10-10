@@ -76,7 +76,7 @@ COPY --from=prebuild /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
 RUN addgroup -S -g 1000 rails \
-&&  adduser rails -u 1000 -G rails -s /bin/bash \
+&&  adduser rails -D -u 1000 -G rails -s /bin/bash \
 &&  chown -R rails:rails db log storage tmp
 USER 1000:1000
 
