@@ -11,7 +11,7 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 # Install base packages
 RUN apt-get update -qq \
 &&  apt-get install --no-install-recommends -y \ 
-    build-essential curl git libjemalloc2 libpq-dev libvips nodejs pkg-config sqlite3 \
+    build-essential curl git libjemalloc2 libpq-dev libvips nodejs openssl pkg-config sqlite3 \
 &&  apt-get clean \
 &&  rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
@@ -84,6 +84,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-EXPOSE 3001
-EXPOSE 3002
 CMD ["/rails/bin/rails", "server"]
